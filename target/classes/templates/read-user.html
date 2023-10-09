@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Update User</h1>
+	<form action="update" method="POST">
+        Id<input type="text" name="id" th:value="${user.id}" disabled/><br>
+		Name<input type="text" name="name" th:value="${user.name}"/><br>
+		E-mail<input type="text" name="email" th:value="${user.email}"/><br>
+		<input type="submit"/>
+	</form>
+</body>
+</html>
