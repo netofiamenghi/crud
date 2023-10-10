@@ -54,7 +54,7 @@ public class UserController {
 				RedirectAttributes redirect) {
 		userRepository.deleteById(id);
 		redirect.addFlashAttribute("globalMessage","Usuário excluído com sucesso");
-		return new RedirectView("list-usuario");
+		return new RedirectView("/" + USUARIO_URI + "list-usuario");
 	}
 	
 	@GetMapping(value = "/read-usuario/{id}")
