@@ -21,6 +21,11 @@ public class MainController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@RequestMapping("/")
+	public String paginaInicial(){
+		return "index";
+	}
+
     @RequestMapping("/inicio")
     public String home(Model model) {
     	List<User> users = (List<User>) userRepository.findAll();
