@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerenciador de Produtos</title>
+</head>
+<body>
+	<h1>Produtos</h1>
+	<div class="alert alert-success" th:if="${globalMessage}" th:text="${globalMessage}">mensagem</div><br/>
+	<table border="1">
+		<tr>
+			<th>Id</th>
+			<th>Descrição</th>
+			<th>Valor</th>
+			<th></th>
+		</tr>
+
+		<tr th:each="produto : ${produtos}">
+			<td><span th:text="${produto.id}"></span></td>
+			<td><span th:text="${produto.descricao}"></span></td>
+			<td><span th:text="${produto.valor}"></span></td>
+			<td><a th:href="@{read-produto/{id}(id=${produto.id})}" th:method="get">Update</a>
+				<a th:href="@{delete-produto/{id}(id=${produto.id})}" th:method="delete">Delete</a>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<a href="add-produto">
+		<button>Add Product</button>
+	</a>
+	<p class="big-font">
+		Voltar para <a href="/" class="underline">home page</a>
+	</p>
+</body>
+</html>

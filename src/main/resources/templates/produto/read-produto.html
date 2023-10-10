@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Update Product</h1>
+	<form th:action="@{/produtos/update-produto}" th:object="${produto}" action="#"  method="POST">
+        <input type="hidden" name="id" th:value="${produto.id}" /><br>
+		Descrição<input type="text" name="descricao" th:value="${produto.descricao}"/><br>
+		Valor<input type="text" name="valor" th:value="${produto.valor}"/><br>
+		<input type="submit"/>
+	</form>
+	<p class="big-font">
+		Voltar para <a href="/" class="underline">home page</a>
+	</p>
+</body>
+</html>
