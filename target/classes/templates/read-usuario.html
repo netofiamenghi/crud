@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Update User</h1>
-	<form th:action="@{/update-usuario}" th:object="${user}" action="#"  method="POST">
+	<form th:action="@{/usuarios/update-usuario}" th:object="${user}" action="#"  method="POST">
         <input type="hidden" name="id" th:value="${user.id}" /><br>
 		Name<input type="text" name="name" th:value="${user.name}"/><br>
 		E-mail<input type="text" name="email" th:value="${user.email}"/><br>
