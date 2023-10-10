@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -39,17 +40,21 @@ public class MainController {
     }
 
 	@RequestMapping("/save-usuario")
-	public @ResponseBody RedirectView addNewUser(@RequestParam String name, @RequestParam String email) {
+	public @ResponseBody RedirectView addNewUser(@RequestParam String name, 
+				@RequestParam String email, RedirectAttributes redirect) {
 		User n = new User();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
+		redirect.addFlashAttribute("globalMessage","Usuário gravado com sucesso");
 		return new RedirectView("list-usuario");
 	}
 
 	@GetMapping("delete-usuario/{id}")
-	public @ResponseBody RedirectView deleteUser(@PathVariable(name = "id") Integer id) {
+	public @ResponseBody RedirectView deleteUser(@PathVariable(name = "id") Integer id,
+				RedirectAttributes redirect) {
 		userRepository.deleteById(id);
+		redirect.addFlashAttribute("globalMessage","Usuário excluído com sucesso");
 		return new RedirectView("/list-usuario");
 	}
 	
@@ -59,12 +64,14 @@ public class MainController {
 	}
 
 	@RequestMapping("/update-usuario")
-	public @ResponseBody RedirectView updateUser(@RequestParam Integer id, @RequestParam String name, @RequestParam String email) {
+	public @ResponseBody RedirectView updateUser(@RequestParam Integer id, @RequestParam String name, 
+				@RequestParam String email, RedirectAttributes redirect) {
 		Optional<User> optionalUser = userRepository.findById(id);
 		User n = optionalUser.get();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
+		redirect.addFlashAttribute("globalMessage","Usuário alterado com sucesso");
 		return new RedirectView("/list-usuario");
 	}
 }
