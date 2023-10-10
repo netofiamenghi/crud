@@ -18,13 +18,13 @@
 			<td><span th:text="${user.id}"></span></td>
 			<td><span th:text="${user.name}"></span></td>
 			<td><span th:text="${user.email}"></span></td>
-			<td><a th:href="@{read/{id}(id=${user.id})}" th:method="get">Update</a>
-				<a th:href="@{delete/{id}(id=${user.id})}" th:method="delete">Delete</a>
+			<td><a th:href="@{read-usuario/{id}(id=${user.id})}" th:method="get">Update</a>
+				<a th:href="@{delete-usuario/{id}(id=${user.id})}" th:method="delete">Delete</a>
 			</td>
 		</tr>
 	</table>
 	<br>
-	<a href="form">
+	<a href="add-usuario">
 		<button>Add User</button>
 	</a>
 </body>

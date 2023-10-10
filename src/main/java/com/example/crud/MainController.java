@@ -26,45 +26,45 @@ public class MainController {
 		return "index";
 	}
 
-    @RequestMapping("/inicio")
-    public String home(Model model) {
+    @RequestMapping("/list-usuario")
+    public String listarUsuarios(Model model) {
     	List<User> users = (List<User>) userRepository.findAll();
     	model.addAttribute("users", users);
-        return "home";
+        return "list-usuario";
     }
     
-    @GetMapping("/form")
-    public String add() {
-        return "add-user";
+    @GetMapping("/add-usuario")
+    public String adicionarUsuario() {
+        return "add-usuario";
     }
 
-	@RequestMapping("/add")
+	@RequestMapping("/save-usuario")
 	public @ResponseBody RedirectView addNewUser(@RequestParam String name, @RequestParam String email) {
 		User n = new User();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
-		return new RedirectView("inicio");
+		return new RedirectView("list-usuario");
 	}
 
-	@GetMapping("delete/{id}")
+	@GetMapping("delete-usuario/{id}")
 	public @ResponseBody RedirectView deleteUser(@PathVariable(name = "id") Integer id) {
 		userRepository.deleteById(id);
-		return new RedirectView("/crud/inicio");
+		return new RedirectView("/crud/list-usuario");
 	}
 	
-	@GetMapping(value = "read/{id}")
+	@GetMapping(value = "read-usuario/{id}")
 	public ModelAndView readUser(@PathVariable("id") User user) {
-		return new ModelAndView("read-user", "user", user);
+		return new ModelAndView("read-usuario", "user", user);
 	}
 
-	@RequestMapping("/update")
+	@RequestMapping("/update-usuario")
 	public @ResponseBody RedirectView updateUser(@RequestParam Integer id, @RequestParam String name, @RequestParam String email) {
 		Optional<User> optionalUser = userRepository.findById(id);
 		User n = optionalUser.get();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
-		return new RedirectView("/crud/inicio");
+		return new RedirectView("/crud/list-usuario");
 	}
 }
