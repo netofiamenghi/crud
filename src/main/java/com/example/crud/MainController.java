@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping(path = "/crud")
+@RequestMapping(path = "/")
 public class MainController {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class MainController {
 	@GetMapping("delete-usuario/{id}")
 	public @ResponseBody RedirectView deleteUser(@PathVariable(name = "id") Integer id) {
 		userRepository.deleteById(id);
-		return new RedirectView("/crud/list-usuario");
+		return new RedirectView("/list-usuario");
 	}
 	
 	@GetMapping(value = "read-usuario/{id}")
@@ -65,6 +65,6 @@ public class MainController {
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
-		return new RedirectView("/crud/list-usuario");
+		return new RedirectView("/list-usuario");
 	}
 }
