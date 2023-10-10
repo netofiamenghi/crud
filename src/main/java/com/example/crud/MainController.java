@@ -1,6 +1,7 @@
 package com.example.crud;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,15 +49,16 @@ public class MainController {
 	
 	@GetMapping(value = "read/{id}")
 	public ModelAndView readUser(@PathVariable("id") User user) {
-		return new ModelAndView("read-user","user",user);
+		return new ModelAndView("read-user", "user", user);
 	}
-	
-	// @RequestMapping(path = "/update")
-	// public @ResponseBody String updateUser(@RequestParam Integer id, String name, @RequestParam String email) {
-	// 	User n = retrieveUser(id).get();
-	// 	n.setName(name);
-	// 	n.setEmail(email);
-	// 	userRepository.save(n);
-	// 	return "Updated";
-	// }
+
+	@RequestMapping("/update")
+	public @ResponseBody String updateUser(@RequestParam Integer id, @RequestParam String name, @RequestParam String email) {
+		Optional<User> optionalUser = userRepository.findById(id);
+		User n = optionalUser.get();
+		n.setName(name);
+		n.setEmail(email);
+		userRepository.save(n);
+		return "Updated";
+	}
 }
