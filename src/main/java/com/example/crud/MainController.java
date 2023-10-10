@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping(path = "/crud")
@@ -33,18 +34,18 @@ public class MainController {
     }
 
 	@RequestMapping("/add")
-	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
+	public @ResponseBody RedirectView addNewUser(@RequestParam String name, @RequestParam String email) {
 		User n = new User();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
-		return "Saved";
+		return new RedirectView("inicio");
 	}
 
 	@GetMapping("delete/{id}")
-	public @ResponseBody String deleteUser(@PathVariable(name = "id") Integer id) {
+	public @ResponseBody RedirectView deleteUser(@PathVariable(name = "id") Integer id) {
 		userRepository.deleteById(id);
-		return "Deleted";
+		return new RedirectView("/crud/inicio");
 	}
 	
 	@GetMapping(value = "read/{id}")
@@ -53,12 +54,12 @@ public class MainController {
 	}
 
 	@RequestMapping("/update")
-	public @ResponseBody String updateUser(@RequestParam Integer id, @RequestParam String name, @RequestParam String email) {
+	public @ResponseBody RedirectView updateUser(@RequestParam Integer id, @RequestParam String name, @RequestParam String email) {
 		Optional<User> optionalUser = userRepository.findById(id);
 		User n = optionalUser.get();
 		n.setName(name);
 		n.setEmail(email);
 		userRepository.save(n);
-		return "Updated";
+		return new RedirectView("/crud/inicio");
 	}
 }
