@@ -30,12 +30,12 @@ public class UserController {
     public String listarUsuarios(Model model) {
     	List<User> users = (List<User>) userRepository.findAll();
     	model.addAttribute("users", users);
-        return "list-usuario";
+        return "usuario/list-usuario";
     }
     
     @GetMapping("add-usuario")
     public String adicionarUsuario() {
-        return "add-usuario";
+        return "usuario/add-usuario";
     }
 
 	@RequestMapping("save-usuario")
@@ -59,7 +59,7 @@ public class UserController {
 	
 	@GetMapping(value = "/read-usuario/{id}")
 	public ModelAndView readUser(@PathVariable("id") User user) {
-		return new ModelAndView("read-usuario", "user", user);
+		return new ModelAndView("usuario/read-usuario", "user", user);
 	}
 
 	@RequestMapping("update-usuario")
